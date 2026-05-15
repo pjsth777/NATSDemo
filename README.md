@@ -43,3 +43,13 @@ dotnet run
 1. The terminal will initialize and show that the background subscriber is listening on the stocks.updates subject.
 2. Press Any Key to trigger the publisher loop.
 3. Watch the publisher fire 10 sequential stock ticks, which are instantly caught and logged by the background subscriber thread.
+
+---
+
+## Code Breakdown
+
+* **StockTick:** A lightweight C# record used to pass structured data (Symbol, Price, Timestamp).
+* **NatsConnection:** Opened with custom NatsOpts configured for NatsJsonSerializerRegistry.Default so complex objects pass seamlessly as JSON.
+* **SubscribeAsync<T>:** An async stream (await foreach) that patiently suspends execution without logging CPU cycles until a new message lands on the target subject.
+
+---
